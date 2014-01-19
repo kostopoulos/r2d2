@@ -8,4 +8,4 @@ require './model/Maze'
 
 maze = Maze.new
 maze.read_maze
-
+maze.print
