@@ -3,9 +3,8 @@ class Maze
 	@goal_point
 	@maze
 
-	def initialize(maze_file=nil)
-		read_maze #unless maze_file.nil?
-		@maze = Array.new
+	def initialize
+		#@maze = Array.new
 	end
 	
 	def read_maze
@@ -14,6 +13,12 @@ class Maze
 
 		maze_settings = {} unless maze_settings
 		maze_settings[:maze_file.to_s] = "example"
+
+		mz = YAML.load_file maze_settings[:maze_file.to_s]
+
+		puts mz
+
+		@maze = Array.new
 	
 		return maze_settings
 	end
