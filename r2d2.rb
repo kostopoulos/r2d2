@@ -2,5 +2,6 @@
 
 require 'rubygems'
 require 'bundler/setup'
+require 'yaml'
 
-puts 'r2d2'
+YAML.load_file './mazes/mazes.yml'
