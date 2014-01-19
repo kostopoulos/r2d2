@@ -3,5 +3,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'yaml'
+require './model/Maze'
 
-YAML.load_file './mazes/mazes.yml'
+maze = Maze.new
