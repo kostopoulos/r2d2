@@ -1,0 +1,1 @@
+To set up your maze just change ./mazes/maze.yml file
