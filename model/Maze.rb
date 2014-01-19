@@ -1,10 +1,7 @@
 require_relative 'Point'
 
 class Maze
-	@dimensions
-	@obstacles
-	@start_point
-	@goal_point
+	attr_accessor :dimensions, :obstacles, :start_point, :goal_point
 
 	def initialize
 		@dimensions = nil
@@ -34,23 +31,42 @@ class Maze
 		@obstacles.include? point
 	end
 
+
+	def is_start_point?(point)
+		@start_point.eql? point
+	end
+
+	def is_goal_point?(point)
+		@goal_point.eql? point
+	end
+
+
+	def print_maze
+		1..@dimensions.x.each do |x|
+			1..@dimensions.y do |y|
+				
+			end
+		end
+	end
+
 	private
+
 		def create_maze(maze_file)
 			mz = YAML.load_file maze_file
 			raise "Please define maze dimensions" unless mz[:dimensions.to_s] || mz[:dimensions.to_s][:x] || mz[:dimensions.to_s][:y]
 			raise "Please define robot's start point" unless mz[:start.to_s]
 			raise "Please define goal point" unless mz[:goal.to_s]
 
-			@dimensions = Point.new mz[:dimensions.to_s][:x] , mz[:dimensions.to_s][:y]
-			@start_point = Point.new mz[:start.to_s][:x] , mz[:start.to_s][:y]
-			@goal_point  = Point.new mz[:goal.to_s][:x] , mz[:goal.to_s][:y]
+			@dimensions = Point.new mz[:dimensions.to_s][:x.to_s] , mz[:dimensions.to_s][:y.to_s]
+			@start_point = Point.new mz[:start.to_s][:x.to_s] , mz[:start.to_s][:y.to_s]
+			@goal_point  = Point.new mz[:goal.to_s][:x.to_s] , mz[:goal.to_s][:y.to_s]
 
 			raise "Invalid start point. Start point (#{@start_point.x} , #{@start_point.y}) is out of bountaries" if inside_boundaries? @start_point
 
 			raise "Invalid goal point. Goal point (#{@goal_point.x} , #{@goal_point.y}) is out of bountaries" if inside_boundaries? @goal_point
 
 			mz[:obstacles.to_s].each do |obstacle|
-				@obstacles.push Point.new obstacle[:x], obstacle[:y]
+				@obstacles.push Point.new obstacle[:x.to_s], obstacle[:y.to_s]
 			end
 
 			raise "Invalid start point. Start point (#{@start_point.x} , #{@start_point.y}) is on an obstacle" if is_obstacle? @start_point
@@ -60,8 +76,8 @@ class Maze
 		end
 
 		def inside_boundaries?(point)
-			@point.x >0 and @point.x <= @dimensions.x and @point.y > 0 and @point.y <= @dimensions.y
+			raise "Invalid point #{point}" unless point
+			point.x >0 and point.x >= @dimensions.x and point.y > 0 and point.y >= @dimensions.y
 		end
-
 
 end
