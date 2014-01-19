@@ -1,0 +1,12 @@
+dimensions: {x: 100, y: 200}
+
+start: {x: 1, y: 4}
+
+goal: {x: 1, y: 4}
+
+obstacles: [
+          {x: 1, y: 4},
+          {x: 2, y: 5},
+          {x: 3, y: 6}]
+
+

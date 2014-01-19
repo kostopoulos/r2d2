@@ -1,5 +1,1 @@
-start: S
-goal: G
-obstacle: O
-free_block: F
 maze_file: example
