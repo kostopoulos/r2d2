@@ -1,4 +1,6 @@
 require_relative 'Point'
+require_relative 'Robot'
+
 
 class Maze
 	attr_accessor :dimensions, :obstacles, :start_point, :goal_point, :robot
@@ -14,7 +16,7 @@ class Maze
 	end
 
 	def find_exit
-		@robot.position = @start_point
+		@robot.set_position @start_point
 	end
 	
 	def read_maze
