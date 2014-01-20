@@ -1,7 +1,7 @@
 require_relative 'Point'
 
 class Maze
-	attr_accessor :dimensions, :obstacles, :start_point, :goal_point
+	attr_accessor :dimensions, :obstacles, :start_point, :goal_point, :robot
 
 	def initialize
 		@dimensions = nil
@@ -9,6 +9,12 @@ class Maze
 		@goal_point = nil
 
 		@obstacles = Array.new
+
+		@robot = Robot.new
+	end
+
+	def find_exit
+		@robot.position = @start_point
 	end
 	
 	def read_maze
@@ -51,16 +57,8 @@ class Maze
 	def print
 		(1..@dimensions.x).each do |x|
 			(1..@dimensions.y).each do |y|
-				point = Point.new x,y
-				if is_start_point? point
-					point.print Point::START_POINT
-				elsif is_goal_point? point
-					point.print Point::GOAL_POINT
-				elsif is_obstacle? point
-					point.print Point::OBSTACLE
-				else
-					point.print Point::FREE_POINT
-				end
+				point = point_at x,y
+				point.print
 			end
 		end
 	end
@@ -89,6 +87,20 @@ class Maze
 
 			raise "Invalid goal point. Goals point (#{@start_point.x} , #{@start_point.y}) is on an obstacle" if is_obstacle? @goal_point
 
+		end
+
+		def point_at(x,y)
+			point = Point.new x,y
+			if is_start_point? point
+				point.type =  Point::START_POINT
+			elsif is_goal_point? point
+				point.type = Point::GOAL_POINT
+			elsif is_obstacle? point
+				point.type = Point::OBSTACLE
+			else
+				point.type = Point::FREE_POINT
+			end
+			return point
 		end
 
 end

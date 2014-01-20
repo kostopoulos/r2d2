@@ -1,5 +1,5 @@
 class Point
-	attr_accessor :x,:y
+	attr_accessor :x,:y, :type
 
 	START_POINT = :start_point
 	GOAL_POINT = :goal_point
@@ -18,7 +18,7 @@ class Point
 	    @x == other.x && @y == other.y
 	end
 
-	def print(type)
-		raise "Invalid point type #{type} for point (#{@x}, #{@y})" unless TYPES.include? type
+	def print
+		raise "Invalid point type #{@type} for point (#{@x}, #{@y})" unless TYPES.include? @type
 	end
 end
