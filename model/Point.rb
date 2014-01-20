@@ -8,9 +8,10 @@ class Point
 
 	TYPES = [START_POINT, GOAL_POINT, OBSTACLE,FREE_POINT]
 
-	def initialize(x,y)
+	def initialize(x,y,type=nil)
 		@x = x
 		@y = y
+		@type = type
 	end
 
 	def ==(other)
@@ -19,6 +20,11 @@ class Point
 	end
 
 	def print
+		is_valid?
+		puts "(x : #{@x}, y : #{@y}) type : #{@type}"
+	end
+
+	def is_valid?
 		raise "Invalid point type #{@type} for point (#{@x}, #{@y})" unless TYPES.include? @type
 	end
 end

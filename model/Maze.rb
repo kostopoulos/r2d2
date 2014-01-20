@@ -17,6 +17,10 @@ class Maze
 
 	def find_exit
 		@robot.set_position @start_point
+		until robot_achieved_goal? or @robot.cannot_solve_maze?
+			@robot.move
+			robot_neighbour.each{|p| @robot.learn_point point}
+		end
 	end
 	
 	def read_maze
@@ -36,12 +40,11 @@ class Maze
 
 	def is_inside_boundaries?(point)
 		raise "Invalid point #{point}" unless point
-		point.x >0 and point.x >= @dimensions.x and point.y > 0 and point.y >= @dimensions.y
+		point.x >0 and point.x <= @dimensions.x and point.y > 0 and point.y <= @dimensions.y
 	end
 
 	def is_obstacle?(point)
-		raise "Invalid point #{point}" unless point
-		@obstacles.include? point
+		is_inside_boundaries?(point) and @obstacles.include?(point)
 	end
 
 	def is_free_point?(point)
@@ -49,23 +52,31 @@ class Maze
 	end
 
 	def is_start_point?(point)
-		@start_point.eql? point
+		is_inside_boundaries?(point) and @start_point.x == point.x and @start_point.y == point.y
 	end
 
 	def is_goal_point?(point)
-		@goal_point.eql? point
+		is_inside_boundaries?(point) and @goal_point.x == point.x and @goal_point.y == point.y
 	end
 
 	def print
 		(1..@dimensions.x).each do |x|
 			(1..@dimensions.y).each do |y|
 				point = point_at x,y
-				point.print
+				point.print if point
 			end
 		end
 	end
 
 	private
+		def robot_neighbour
+			neighbour_points = [point_at(@robot.up), point_at(@robot.down), point_at(@robot.left), point_at(@robot.right)]
+			neighbour_points.delete_if{|p| p.nil? || !is_inside_boundaries?(p) }
+		end
+
+		def robot_achieved_goal?
+			@robot.position.x == @goal_point.x and @robot.position.y == @goal_point.x
+		end
 
 		def create_maze(maze_file)
 			mz = YAML.load_file maze_file
@@ -77,22 +88,22 @@ class Maze
 			@start_point = Point.new mz[:start.to_s][:x.to_s] , mz[:start.to_s][:y.to_s]
 			@goal_point  = Point.new mz[:goal.to_s][:x.to_s] , mz[:goal.to_s][:y.to_s]
 
-			raise "Invalid start point. Start point (#{@start_point.x} , #{@start_point.y}) is out of bountaries" if is_inside_boundaries? @start_point
+			raise "Invalid start point. Start point (#{@start_point.x} , #{@start_point.y}) is out of bountaries" unless is_inside_boundaries? @start_point
 
-			raise "Invalid goal point. Goal point (#{@goal_point.x} , #{@goal_point.y}) is out of bountaries" if is_inside_boundaries? @goal_point
+			raise "Invalid goal point. Goal point (#{@goal_point.x} , #{@goal_point.y}) is out of bountaries" unless is_inside_boundaries? @goal_point
 
 			mz[:obstacles.to_s].each do |obstacle|
-				@obstacles.push Point.new obstacle[:x.to_s], obstacle[:y.to_s]
+				@obstacles.push Point.new obstacle[:x.to_s], obstacle[:y.to_s], Point::OBSTACLE
 			end
 
 			raise "Invalid start point. Start point (#{@start_point.x} , #{@start_point.y}) is on an obstacle" if is_obstacle? @start_point
 
 			raise "Invalid goal point. Goals point (#{@start_point.x} , #{@start_point.y}) is on an obstacle" if is_obstacle? @goal_point
-
 		end
 
 		def point_at(x,y)
 			point = Point.new x,y
+			return nil unless is_inside_boundaries? point
 			if is_start_point? point
 				point.type =  Point::START_POINT
 			elsif is_goal_point? point
@@ -102,6 +113,7 @@ class Maze
 			else
 				point.type = Point::FREE_POINT
 			end
+			
 			return point
 		end
 
