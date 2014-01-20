@@ -19,7 +19,7 @@ class Maze
 		@robot.set_position @start_point
 		until robot_achieved_goal? or @robot.cannot_solve_maze?
 			@robot.move
-			robot_neighbour.each{|p| @robot.learn_point point}
+			robot_neighbour.each{|p| @robot.learn_point p}
 		end
 	end
 	
@@ -70,7 +70,11 @@ class Maze
 
 	private
 		def robot_neighbour
-			neighbour_points = [point_at(@robot.up), point_at(@robot.down), point_at(@robot.left), point_at(@robot.right)]
+			neighbour_points = [point_at( @robot.up.x    , @robot.up.y), 
+								point_at( @robot.down.x  , @robot.down.y),
+								point_at( @robot.left.x  , @robot.left.y),
+								point_at( @robot.right.x , @robot.right.y)]
+
 			neighbour_points.delete_if{|p| p.nil? || !is_inside_boundaries?(p) }
 		end
 
@@ -113,7 +117,7 @@ class Maze
 			else
 				point.type = Point::FREE_POINT
 			end
-			
+
 			return point
 		end
 

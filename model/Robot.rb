@@ -14,7 +14,7 @@ class Robot
 	end
 
 	def cannot_solve_maze?
-		true
+		@known_maze.include?(up) and @known_maze.include?(down) and @known_maze.include?(left) and @known_maze.include?(right)
 	end
 
 	def move
@@ -29,21 +29,25 @@ class Robot
 	def up
 		point = @position
 		point.y +=1
+		return point
 	end
 
 	def down
 		point = @position
 		point.y -=1
+		return point
 	end
 
 	def right
 		point = @position
 		point.x +=1
+		return point
 	end
 
 	def left
 		point = @position
 		point.x -=1
+		return point
 	end
 
 end
