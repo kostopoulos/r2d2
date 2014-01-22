@@ -14,7 +14,7 @@ class Robot
 		@maze_visited.include?(up) and @maze_visited.include?(down) and @maze_visited.include?(left) and @maze_visited.include?(right)
 	end
 
-	def move_at(point )
+	def move_at(point)
 		@previous_position = @position
 		@position = point
 	
