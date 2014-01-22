@@ -1,7 +1,6 @@
 require_relative 'Point'
 require_relative 'Robot'
 
-
 class Maze
 	attr_accessor :dimensions, :obstacles, :start_point, :goal_point, :robot
 
@@ -19,7 +18,8 @@ class Maze
 			robot_moved = false
 			Robot::DIRECTIONS.each do |direction|
 				point = @robot.send direction
-				if !@robot.has_visited?(point) and can_move_at?(point) and !robot_moved
+				point = point_at point.x,point.y
+				if point and !@robot.has_visited?(point) and can_move_at?(point) and !robot_moved
 					@robot.move_at point
 					robot_moved = true
 				end
@@ -27,6 +27,7 @@ class Maze
 
 			@robot.move_at @robot.previous_position unless robot_moved
 		end
+		@robot.print_results
 	end
 	
 	def read_maze
@@ -45,31 +46,33 @@ class Maze
 	end
 
 	def is_inside_boundaries?(point)
-		raise "Invalid point #{point}" unless point
 		point.x >0 and point.x <= @dimensions.x and point.y > 0 and point.y <= @dimensions.y
 	end
 
 	def is_obstacle?(point)
+		raise "Invalid point #{point}" unless point
 		is_inside_boundaries?(point) and @obstacles.include?(point)
 	end
 
 	def is_free_point?(point)
+		raise "Invalid point #{point}" unless point
 		is_inside_boundaries?(point) and !is_start_point?(point) and !is_goal_point?(point) and !is_obstacle?(point)
 	end
 
 	def is_start_point?(point)
+		raise "Invalid point #{point}" unless point
 		is_inside_boundaries?(point) and @start_point.x == point.x and @start_point.y == point.y
 	end
 
 	def is_goal_point?(point)
+		raise "Invalid point #{point}" unless point
 		is_inside_boundaries?(point) and @goal_point.x == point.x and @goal_point.y == point.y
 	end
 
 	def print
 		(1..@dimensions.x).each do |x|
 			(1..@dimensions.y).each do |y|
-				point = point_at x,y
-				point.print if point
+				point_at(x,y).print
 			end
 		end
 	end
@@ -90,8 +93,11 @@ class Maze
 			raise "Please define goal point" unless mz[:goal.to_s]
 
 			@dimensions = Point.new mz[:dimensions.to_s][:x.to_s] , mz[:dimensions.to_s][:y.to_s]
-			@start_point = Point.new mz[:start.to_s][:x.to_s] , mz[:start.to_s][:y.to_s]
-			@goal_point  = Point.new mz[:goal.to_s][:x.to_s] , mz[:goal.to_s][:y.to_s]
+			@start_point = Point.new mz[:start.to_s][:x.to_s] , mz[:start.to_s][:y.to_s], Point::START_POINT
+			@goal_point  = Point.new mz[:goal.to_s][:x.to_s] , mz[:goal.to_s][:y.to_s] , Point::GOAL_POINT
+
+			@start_point.print
+			@goal_point.print
 
 			raise "Invalid start point. Start point (#{@start_point.x} , #{@start_point.y}) is out of bountaries" unless is_inside_boundaries? @start_point
 

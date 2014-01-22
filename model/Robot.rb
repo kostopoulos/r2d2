@@ -30,26 +30,30 @@ class Robot
 		@maze_visited.include? point
 	end
 
+	def print_results
+		@maze_visited.select{|mv| @maze_visited[mv]==1 }.keys.each{|point| point.print}
+	end
+
 	def up
-		point = @position
+		point = Point.new @position.x, @position.y
 		point.y +=1
 		return point
 	end
 
 	def down
-		point = @position
+		point = Point.new @position.x, @position.y
 		point.y -=1
 		return point
 	end
 
 	def right
-		point = @position
+		point = Point.new @position.x, @position.y
 		point.x +=1
 		return point
 	end
 
 	def left
-		point = @position
+		point = Point.new @position.x, @position.y
 		point.x -=1
 		return point
 	end
