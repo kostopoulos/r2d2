@@ -11,15 +11,23 @@ class Maze
 		@goal_point = nil
 
 		@obstacles = Array.new
-
-		@robot = Robot.new
 	end
 
 	def find_exit
-		@robot.set_position @start_point
+		@robot = Robot.new @start_point
 		until robot_achieved_goal? or @robot.cannot_solve_maze?
-			@robot.move
-			robot_neighbour.each{|p| @robot.learn_point p}
+			robot_moved = false
+			Robot::DIRECTIONS.each do |direction|
+				if !@robot.has_visited?(point) and can_move_at?(point) and !robot_moved
+					@robot.move_at point
+					robot_moved = true
+				end
+			end
+
+			unless robot_moved
+				
+			end
+
 		end
 	end
 	
@@ -69,13 +77,8 @@ class Maze
 	end
 
 	private
-		def robot_neighbour
-			neighbour_points = [point_at( @robot.up.x    , @robot.up.y), 
-								point_at( @robot.down.x  , @robot.down.y),
-								point_at( @robot.left.x  , @robot.left.y),
-								point_at( @robot.right.x , @robot.right.y)]
-
-			neighbour_points.delete_if{|p| p.nil? || !is_inside_boundaries?(p) }
+		def can_move_at?(point)
+			is_inside_boundaries?(point) and is_free_point?(point)
 		end
 
 		def robot_achieved_goal?
