@@ -1,0 +1,371 @@
+maze:
+(x : 1, y : 1) Start point
+(x : 1, y : 2) Free point
+(x : 1, y : 3) Obstacle
+(x : 1, y : 4) Free point
+(x : 1, y : 5) Free point
+(x : 1, y : 6) Free point
+(x : 2, y : 1) Free point
+(x : 2, y : 2) Free point
+(x : 2, y : 3) Obstacle
+(x : 2, y : 4) Free point
+(x : 2, y : 5) Free point
+(x : 2, y : 6) Free point
+(x : 3, y : 1) Free point
+(x : 3, y : 2) Free point
+(x : 3, y : 3) Obstacle
+(x : 3, y : 4) Free point
+(x : 3, y : 5) Free point
+(x : 3, y : 6) Free point
+(x : 4, y : 1) Free point
+(x : 4, y : 2) Obstacle
+(x : 4, y : 3) Obstacle
+(x : 4, y : 4) Free point
+(x : 4, y : 5) Free point
+(x : 4, y : 6) Free point
+(x : 5, y : 1) Free point
+(x : 5, y : 2) Free point
+(x : 5, y : 3) Free point
+(x : 5, y : 4) Free point
+(x : 5, y : 5) Obstacle
+(x : 5, y : 6) Free point
+(x : 6, y : 1) Free point
+(x : 6, y : 2) Free point
+(x : 6, y : 3) Free point
+(x : 6, y : 4) Free point
+(x : 6, y : 5) Obstacle
+(x : 6, y : 6) Goal point
+(x : 7, y : 1) Free point
+(x : 7, y : 2) Free point
+(x : 7, y : 3) Free point
+(x : 7, y : 4) Free point
+(x : 7, y : 5) Obstacle
+(x : 7, y : 6) Obstacle
+(x : 8, y : 1) Free point
+(x : 8, y : 2) Free point
+(x : 8, y : 3) Free point
+(x : 8, y : 4) Free point
+(x : 8, y : 5) Free point
+(x : 8, y : 6) Free point
+end of maze
+Robot's current position
+(x : 1, y : 1) Start point
+Trying to move up
+success
+Robot's current position
+(x : 1, y : 2) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 1, y : 2) Free point
+Trying to move right
+success
+Robot's current position
+(x : 2, y : 2) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 2, y : 2) Free point
+Trying to move right
+success
+Robot's current position
+(x : 3, y : 2) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 3, y : 2) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 3, y : 2) Free point
+Trying to move down
+success
+Robot's current position
+(x : 3, y : 1) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 3, y : 1) Free point
+Trying to move right
+success
+Robot's current position
+(x : 4, y : 1) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 4, y : 1) Free point
+Trying to move right
+success
+Robot's current position
+(x : 5, y : 1) Free point
+Trying to move up
+success
+Robot's current position
+(x : 5, y : 2) Free point
+Trying to move up
+success
+Robot's current position
+(x : 5, y : 3) Free point
+Trying to move up
+success
+Robot's current position
+(x : 5, y : 4) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 5, y : 4) Free point
+Trying to move right
+success
+Robot's current position
+(x : 6, y : 4) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 6, y : 4) Free point
+Trying to move right
+success
+Robot's current position
+(x : 7, y : 4) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 7, y : 4) Free point
+Trying to move right
+success
+Robot's current position
+(x : 8, y : 4) Free point
+Trying to move up
+success
+Robot's current position
+(x : 8, y : 5) Free point
+Trying to move up
+success
+Robot's current position
+(x : 8, y : 6) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 8, y : 6) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 8, y : 6) Free point
+Trying to move down
+failed
+Robot's current position
+(x : 8, y : 6) Free point
+Trying to move left
+failed
+Robot's current position
+(x : 8, y : 6) Free point
+Trying to move back
+Robot's current position
+(x : 8, y : 5) Free point
+Trying to move back
+Robot's current position
+(x : 8, y : 4) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 8, y : 4) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 8, y : 4) Free point
+Trying to move down
+success
+Robot's current position
+(x : 8, y : 3) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 8, y : 3) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 8, y : 3) Free point
+Trying to move down
+success
+Robot's current position
+(x : 8, y : 2) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 8, y : 2) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 8, y : 2) Free point
+Trying to move down
+success
+Robot's current position
+(x : 8, y : 1) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 8, y : 1) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 8, y : 1) Free point
+Trying to move down
+failed
+Robot's current position
+(x : 8, y : 1) Free point
+Trying to move left
+success
+Robot's current position
+(x : 7, y : 1) Free point
+Trying to move up
+success
+Robot's current position
+(x : 7, y : 2) Free point
+Trying to move up
+success
+Robot's current position
+(x : 7, y : 3) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 7, y : 3) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 7, y : 3) Free point
+Trying to move down
+failed
+Robot's current position
+(x : 7, y : 3) Free point
+Trying to move left
+success
+Robot's current position
+(x : 6, y : 3) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 6, y : 3) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 6, y : 3) Free point
+Trying to move down
+success
+Robot's current position
+(x : 6, y : 2) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 6, y : 2) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 6, y : 2) Free point
+Trying to move down
+success
+Robot's current position
+(x : 6, y : 1) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 6, y : 1) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 6, y : 1) Free point
+Trying to move down
+failed
+Robot's current position
+(x : 6, y : 1) Free point
+Trying to move left
+failed
+Robot's current position
+(x : 6, y : 1) Free point
+Trying to move back
+Robot's current position
+(x : 6, y : 2) Free point
+Trying to move back
+Robot's current position
+(x : 6, y : 3) Free point
+Trying to move back
+Robot's current position
+(x : 7, y : 3) Free point
+Trying to move back
+Robot's current position
+(x : 7, y : 2) Free point
+Trying to move back
+Robot's current position
+(x : 7, y : 1) Free point
+Trying to move back
+Robot's current position
+(x : 8, y : 1) Free point
+Trying to move back
+Robot's current position
+(x : 8, y : 2) Free point
+Trying to move back
+Robot's current position
+(x : 8, y : 3) Free point
+Trying to move back
+Robot's current position
+(x : 8, y : 4) Free point
+Trying to move back
+Robot's current position
+(x : 7, y : 4) Free point
+Trying to move back
+Robot's current position
+(x : 6, y : 4) Free point
+Trying to move back
+Robot's current position
+(x : 5, y : 4) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 5, y : 4) Free point
+Trying to move right
+failed
+Robot's current position
+(x : 5, y : 4) Free point
+Trying to move down
+failed
+Robot's current position
+(x : 5, y : 4) Free point
+Trying to move left
+success
+Robot's current position
+(x : 4, y : 4) Free point
+Trying to move up
+success
+Robot's current position
+(x : 4, y : 5) Free point
+Trying to move up
+success
+Robot's current position
+(x : 4, y : 6) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 4, y : 6) Free point
+Trying to move right
+success
+Robot's current position
+(x : 5, y : 6) Free point
+Trying to move up
+failed
+Robot's current position
+(x : 5, y : 6) Free point
+Trying to move right
+success
+(x : 1, y : 1) Start point
+(x : 1, y : 2) Free point
+(x : 2, y : 2) Free point
+(x : 3, y : 2) Free point
+(x : 3, y : 1) Free point
+(x : 4, y : 1) Free point
+(x : 5, y : 1) Free point
+(x : 5, y : 2) Free point
+(x : 5, y : 3) Free point
+(x : 5, y : 4) Free point
+(x : 4, y : 4) Free point
+(x : 4, y : 5) Free point
+(x : 4, y : 6) Free point
+(x : 5, y : 6) Free point
+(x : 6, y : 6) Goal point

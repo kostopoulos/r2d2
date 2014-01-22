@@ -1,37 +1,47 @@
 class Robot
-	attr_accessor :maze_visited, :previous_position
+	attr_accessor :maze_visited, :previous_positions
 	attr_reader :position
 
 	DIRECTIONS = [:up,:right, :down, :left]
 
 	def initialize(position)
 		@position = position
-		@previous_position = position
-		@maze_visited = Hash.new
+		@maze_visited = {position => 1}
+		@previous_positions = []
 	end
 
-	def cannot_solve_maze?
+	def reached_dead_end?
 		@maze_visited.include?(up) and @maze_visited.include?(down) and @maze_visited.include?(left) and @maze_visited.include?(right)
 	end
 
 	def move_at(point)
-		@previous_position = @position
+		@previous_positions.push @position
 		@position = point
 	
-		if @maze_visited[@position]
-			@maze_visited[@position] += 1 
+		if has_visited? @position
+			@maze_visited[@position] = 2 
 		else
 			@maze_visited[@position] = 1
 		end
 
+		@previous_positions.push point if point.type == Point::GOAL_POINT
+
+	end
+
+	def move_back
+		@position = @previous_positions.pop
 	end
 
 	def has_visited?(point)
-		@maze_visited.include? point
+		@maze_visited.keys.include? point
+	end
+	def times_visited(point)
+		@maze_visited[point]
 	end
 
 	def print_results
-		@maze_visited.select{|mv| @maze_visited[mv]==1 }.keys.each{|point| point.print}
+		"Root found"
+		@previous_positions.each{|point| point.print}
 	end
 
 	def up
@@ -56,6 +66,11 @@ class Robot
 		point = Point.new @position.x, @position.y
 		point.x -=1
 		return point
+	end
+
+	def print_position
+		puts "Robot's current position"
+		@position.print
 	end
 
 end

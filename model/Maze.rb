@@ -14,18 +14,40 @@ class Maze
 
 	def find_exit
 		@robot = Robot.new @start_point
-		until robot_achieved_goal? or @robot.cannot_solve_maze?
+		until robot_achieved_goal? or @robot.reached_dead_end?
 			robot_moved = false
 			Robot::DIRECTIONS.each do |direction|
 				point = @robot.send direction
 				point = point_at point.x,point.y
+				@robot.print_position
+				puts "Trying to move #{direction}"
 				if point and !@robot.has_visited?(point) and can_move_at?(point) and !robot_moved
+					puts "success"
 					@robot.move_at point
 					robot_moved = true
+					break
+				else
+					puts "failed"
 				end
 			end
 
-			@robot.move_at @robot.previous_position unless robot_moved
+			unless robot_moved
+				begin 
+					@robot.print_position
+					puts "Trying to move back"
+					@robot.move_back
+					neighbour_points = robot_neighbour
+					
+					if neighbour_points.empty?
+						robot_has_possible_moves = false
+					else
+						robot_has_possible_moves = neighbour_points.select{|np| !@robot.has_visited? np }.count > 0
+						if !robot_has_possible_moves and neighbour_points.select{|np| @robot.times_visited(np) == 2 }.count == neighbour_points.count
+							raise "I am sorry :-( Robot cannot find its way out..."
+						end
+					end
+				end while !robot_has_possible_moves
+			end
 		end
 		@robot.print_results
 	end
@@ -70,21 +92,32 @@ class Maze
 	end
 
 	def print
+		puts "maze:"
 		(1..@dimensions.x).each do |x|
 			(1..@dimensions.y).each do |y|
 				point_at(x,y).print
 			end
 		end
+		puts "end of maze"
 	end
 
 	private
 		def can_move_at?(point)
-			is_inside_boundaries?(point) and is_free_point?(point)
+			is_inside_boundaries?(point) and ( is_free_point?(point) or  is_goal_point?(point) )
 		end
 
 		def robot_achieved_goal?
 			@robot.position.x == @goal_point.x and @robot.position.y == @goal_point.x
 		end
+
+		def robot_neighbour
+			neighbour_points = [point_at( @robot.up.x    , @robot.up.y), 
+								point_at( @robot.down.x  , @robot.down.y),
+								point_at( @robot.left.x  , @robot.left.y),
+								point_at( @robot.right.x , @robot.right.y)]
+
+			neighbour_points.delete_if{|p| p.nil? || !is_inside_boundaries?(p) || is_obstacle?(p) }
+      end
 
 		def create_maze(maze_file)
 			mz = YAML.load_file maze_file
@@ -95,9 +128,6 @@ class Maze
 			@dimensions = Point.new mz[:dimensions.to_s][:x.to_s] , mz[:dimensions.to_s][:y.to_s]
 			@start_point = Point.new mz[:start.to_s][:x.to_s] , mz[:start.to_s][:y.to_s], Point::START_POINT
 			@goal_point  = Point.new mz[:goal.to_s][:x.to_s] , mz[:goal.to_s][:y.to_s] , Point::GOAL_POINT
-
-			@start_point.print
-			@goal_point.print
 
 			raise "Invalid start point. Start point (#{@start_point.x} , #{@start_point.y}) is out of bountaries" unless is_inside_boundaries? @start_point
 

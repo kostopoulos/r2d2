@@ -21,7 +21,7 @@ class Point
 
 	def print
 		is_valid?
-		puts "(x : #{@x}, y : #{@y}) type : #{@type}"
+		puts "(x : #{@x}, y : #{@y}) #{@type.to_s.sub('_',' ').capitalize}"
 	end
 
 	def is_valid?
