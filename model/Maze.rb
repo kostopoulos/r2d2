@@ -18,16 +18,14 @@ class Maze
 		until robot_achieved_goal? or @robot.cannot_solve_maze?
 			robot_moved = false
 			Robot::DIRECTIONS.each do |direction|
+				point = @robot.send direction
 				if !@robot.has_visited?(point) and can_move_at?(point) and !robot_moved
 					@robot.move_at point
 					robot_moved = true
 				end
 			end
 
-			unless robot_moved
-				
-			end
-
+			@robot.move_at @robot.previous_position unless robot_moved
 		end
 	end
 	
