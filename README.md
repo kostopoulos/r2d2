@@ -19,7 +19,7 @@ provide a yml file with the format as the [example.yml](https://github.com/kosto
 #Output
 
 Output is given in the terminal or you can . For the [example.yml](https://github.com/kostopoulos/r2d2/blob/master/mazes/example.yml)
-the relative output
+the relative output is [test.txt](https://github.com/kostopoulos/r2d2/blob/master/results/test.txt)
 
 
 
