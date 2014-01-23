@@ -1,4 +1,4 @@
-Created by Konstantinos Kostopoulos
+Created by [Konstantinos Kostopoulos](https://github.com/kostopoulos)
 
 #Hot to run
 
