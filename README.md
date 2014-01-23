@@ -1,6 +1,6 @@
 Created by [Konstantinos Kostopoulos](https://github.com/kostopoulos)
 
-#Hot to run
+#How to run
 
 Prefer ruby 2.1.0p0 and bundler (see [Gemfile](https://github.com/kostopoulos/r2d2/blob/master/Gemfile) )
 
